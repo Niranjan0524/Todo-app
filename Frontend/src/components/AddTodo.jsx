@@ -23,32 +23,36 @@ const AddTodo = () => {
         task: todoText,
         date: todoDate
       })
-    }).then((res) =>{ 
-      return res.json();
     })
+    .then(res => res.json())
     .then(serverItem => {
+
+      console.log("server item",serverItem);  
       const {id, todoText, todoDate} = todoItemToClientModel(serverItem);
+      
       addTodoItem(id, todoText, todoDate);
     })
   }
 
   return (
-    <div className="container">
-      <div className="row kg-row">
-        <div className="col-5">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Enter Todo Here"
-            ref={todoTextInput}
-          />
-        </div>
-        <div className="col-3">
-          <input type="date" ref={todoDateInput} className="form-control"/>
-        </div>
-        <div className="col-2">
-          <Button btnType="success" btnText="Add" handler={addHandler}/>
-        </div>
+    <div className="flex items-center justify-between p-4 bg-white shadow-md rounded-lg mb-4 transition-transform transform max-w-md mx-auto">
+      <div className="flex-1">
+        <input
+          type="text"
+          className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter Todo Here"
+          ref={todoTextInput}
+        />
+      </div>
+      <div className="flex-none ml-4">
+        <input
+          type="date"
+          ref={todoDateInput}
+          className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div className="flex-none ml-4">
+        <Button btnType="success" btnText="Add" handler={addHandler} />
       </div>
     </div>
   );

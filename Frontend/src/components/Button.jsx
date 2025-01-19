@@ -1,14 +1,19 @@
-const Button = ({btnType, btnText, handler}) => {
+const Button = ({ btnType, btnText, handler }) => {
+  let btnClass = "px-4 py-2 rounded focus:outline-none ";
 
   if (btnType === 'success') {
-    return <button className="btn btn-success button" onClick={handler}>{btnText}</button>;
-  
+    btnClass += "bg-green-500 hover:bg-green-600 text-white";
   } else if (btnType === 'danger') {
-    return <button className="btn btn-danger button" onClick={handler}>{btnText}</button>;
-  
+    btnClass += "bg-red-500 hover:bg-red-600 text-white";
   } else {
-    return <button className="btn btn-primary button" onClick={handler}>{btnText}</button>;
+    btnClass += "bg-blue-500 hover:bg-blue-600 text-white";
   }
+
+  return (
+    <button className={btnClass} onClick={handler}>
+      {btnText}
+    </button>
+  );
 };
 
 export default Button;

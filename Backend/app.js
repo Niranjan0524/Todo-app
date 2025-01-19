@@ -21,7 +21,10 @@ const url = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_
 
 
 //this means that the server will accept requests from any origin
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
+}));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -34,25 +37,6 @@ app.use((req, res, next) => {
 
 app.use(itemsRouter);
 
-// app.use((req, res, next) => {
-//   if (req.get("cookie")) {
-//     req.isLoggedIn = req.get("Cookie").split("=")[1] === "true";
-//   }
-//     next();
-// });
-
-// app.use(storeRouter);
-
-// app.use("/host", (req, res, next) => {
-//   if (!req.session.isLoggedIn) {
-//     return res.redirect("/login");
-//   }
-//   next();
-// });
-
-// app.use("/host", hostRouter);
-
-// app.use(authRouter);
 
 app.use(errorHandlers);
 
