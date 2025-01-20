@@ -6,7 +6,7 @@ exports.postTodoItem=async (req,res,next)=>{
         const {task,date}=req.body;
       
         const todoItem=new Todo({task, date});
-        console.log(todoItem);
+        
         const item= await todoItem.save();
 
         res.json(item);
@@ -20,7 +20,9 @@ exports.postTodoItem=async (req,res,next)=>{
 
 exports.getTodoItems=async(req,res,next)=>{
     try{
-        const items=await Todo.find();       
+
+        const items=await Todo.find();
+           
         res.json(items);        
     }
     catch(err){

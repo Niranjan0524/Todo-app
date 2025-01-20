@@ -6,19 +6,22 @@ import { todoItemToClientModel } from "../utils/ModelUtil";
 
 const LoadItems = () => {
   const { todoItems, addAllTodoItems } = useContext(TodoItemsContext);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(false);
+    setIsLoading(true);
     fetch("http://localhost:3000/todos")
       .then((res) =>{         
-        console.log(res)
+        
         return res.json();
-      })
+      })      
       .then((items) => {
-        console.log("Loaded items:",items);
+    
         const newItems = items.map(todoItemToClientModel);
         addAllTodoItems(newItems);
+      })
+      .catch((error) => {
+        console.error("Error loading items:", error);
       })
       .finally(() => {
         setIsLoading(false);

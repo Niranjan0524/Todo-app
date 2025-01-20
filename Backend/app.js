@@ -8,38 +8,37 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const mongoose = require("mongoose");
-const path = require("path");
 
+const app = express();
 
-
+const cors = require("cors");
+//this means that the server will accept requests from any origin
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  })
+);
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "build")));
 
 // Handle React routing, return all requests to React app
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
 
 const {itemsRouter} = require("./routers/itemsRouter");
 
-const cors=require("cors");
-
-const app = express();
 
 const {errorHandlers} = require("./controllers/errorcontroller");
 
 const url = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@xdb.mjwzy.mongodb.net/${process.env.MONGO_DB_DATABASE}`;
 
 
-//this means that the server will accept requests from any origin
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
-}));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "dist", "index.html"));
+// });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
