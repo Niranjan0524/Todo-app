@@ -31,7 +31,7 @@ const [isChecked, setIsChecked] = useState(completed);
 
   const checkHandler = () => {
     
-    fetch(`https://todo-app-backend-2k7j.onrender.com/todos/${id}`, {
+    fetch(`http://localhost:3000/todos/${id}`, {
       method: "PATCH",
       headers:{'content-type':'application/json'},
       body:JSON.stringify({completed: !isChecked}),
