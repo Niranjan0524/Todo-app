@@ -10,7 +10,7 @@ const LoadItems = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:3000/todos")
+    fetch("https://todo-app-backend-kd02.onrender.com/todos")
       .then((res) =>{         
         
         return res.json();
