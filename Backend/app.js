@@ -20,7 +20,7 @@ app.use(
   })
 );
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "../Frontend/dist")));
 
 // Handle React routing, return all requests to React app
 // app.get("*", (req, res) => {
@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, "build")));
 const {itemsRouter} = require("./routers/itemsRouter");
 
 
-const {errorHandlers} = require("./controllers/errorcontroller");
+const {errorHandlers} = require("./controllers/errorController");
 
 const url = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@xdb.mjwzy.mongodb.net/${process.env.MONGO_DB_DATABASE}`;
 
