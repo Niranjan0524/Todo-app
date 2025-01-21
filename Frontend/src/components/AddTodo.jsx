@@ -14,7 +14,7 @@ const AddTodo = () => {
     const todoDate = todoDateInput.current.value;
     todoTextInput.current.value = '';
     todoDateInput.current.value = '';
-    fetch("https://todo-app-backend-2k7j.onrender.com/todos", {
+    fetch("http://localhost:3000/todos", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
