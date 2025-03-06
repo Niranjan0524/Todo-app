@@ -17,7 +17,7 @@ const [isChecked, setIsChecked] = useState(completed);
   const {deleteTodoItem} = useContext(TodoItemsContext);
 
   const deleteHandler = () => {    
-    fetch(`http://localhost:3000/todos/${id}`, {
+    fetch(`https://todo-app-backend-kd02.onrender.com/${id}`, {
       method: 'DELETE'
     })
     .then(res => res.json())
@@ -31,7 +31,7 @@ const [isChecked, setIsChecked] = useState(completed);
 
   const checkHandler = () => {
     
-    fetch(`http://localhost:3000/todos/${id}`, {
+    fetch(`https://todo-app-backend-kd02.onrender.com/${id}`, {
       method: "PATCH",
       headers:{'content-type':'application/json'},
       body:JSON.stringify({completed: !isChecked}),
