@@ -10,7 +10,10 @@ const path = require("path");
 const mongoose = require("mongoose");
 
 const app = express();
-
+const compression = require("compression");
+const morgan = require("morgan");
+const fs = require("fs");
+const helmet = require("helmet");
 const cors = require("cors");
 //this means that the server will accept requests from any origin
 app.use(
@@ -31,6 +34,7 @@ const {itemsRouter} = require("./routers/itemsRouter");
 
 
 const {errorHandlers} = require("./controllers/errorController");
+const { applyTimestamps } = require("./models/TodoItem");
 
 const url = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@xdb.mjwzy.mongodb.net/${process.env.MONGO_DB_DATABASE}`;
 
@@ -39,7 +43,10 @@ const url = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_
 //   res.sendFile(path.join(__dirname, "dist", "index.html"));
 // });
 
+app.use(morgan('combined'));
 app.use(express.json());
+app.use(helmet());
+app.use(compression());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
